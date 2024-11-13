@@ -1,0 +1,36 @@
+/*
+ * node_ProtocolPros.cc
+ *
+ *  Created on: Sep 16, 2024
+ *      Author: hp
+ */
+#include <string.h>
+#include <omnetpp.h>
+
+using namespace omnetpp;
+
+class node_ProtocolPros : public cSimpleModule
+{
+  protected:
+    virtual void initialize() override;
+    virtual void handleMessage(cMessage *msg) override;
+};
+
+
+Define_Module(node_ProtocolPros);
+
+void node_ProtocolPros::initialize()
+{
+
+    if (strcmp("Taslim", getName()) == 0) {
+
+        cMessage *msg = new cMessage("PROTOCOL pros");
+        send(msg, "out");
+    }
+
+}
+
+void node_ProtocolPros::handleMessage(cMessage *msg)
+{
+    send(msg, "out"); // send out the message
+}
